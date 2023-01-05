@@ -1,34 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'style/style.css'%}" type="text/css">
+    <link rel="shortcut icon" href="{% static 'icons/logo.svg'%}" type="image/x-icon">
     <title>{{ title }}</title>
 </head>
-<body>
-    <header>
-        <aside>
-            <div class="LogoShop">
-                <img src="{% static 'icons/cactus.png' %}" alt="asd" class="SuMarketLogo">
-            </div>
-            <div>
-                <nav>
-                    <ul>
-                        <li><a href="#">Каталог</a></li>
-                        <li><a href="#">Каталог</a></li>
-                        <li><a href="#">Каталог</a></li>
-                        <li><a href="#">Каталог</a></li>
-                        
-                        
-                        
-                    </ul>
-                </nav>
-            </div>
 
-        </aside>
+<body>
+    <header class="container headerSucculentum">
+        <div class="SucculentumMenu" id="menuBtnOpen">
+            <img src="{% static 'icons/menu.svg' %}" alt="">
+        </div>
+        <div class="titleSucculentum">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="SucculentumCart" id="cartBtnOpen">
+            <img src="{% static 'icons/cart.svg' %}" alt="">
+        </div>
     </header>
+    {% include 'cart.html' %}
+    {% include 'menu.html' %}
+
+    {% block content%}
+
+    {% endblock %}
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/csrftoken.js' %}"></script>
 </body>
+
+
 </html>

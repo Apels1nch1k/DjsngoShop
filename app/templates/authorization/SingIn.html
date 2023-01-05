@@ -1,0 +1,16 @@
+{% load static %}
+
+
+<form id="SingIn" action="{% url 'singin' %}" method="POST">
+    {% csrf_token %}
+
+    {% for fields in formsingin %}
+    <div class="input-box">
+        <p class="errorText"></p>
+        {{fields}}
+
+    </div>
+    {% endfor %}
+
+    <button type='submit' class="btn-green">Войти</button>
+</form>

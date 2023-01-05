@@ -2,3 +2,39 @@
 {% load static %}
 
 
+{% block content%}
+
+<main class="wrapperIndex">
+    <section>
+        <div class="MainPhoto">
+            <div class="Slid">
+                <img src="{% static 'assets/slide.jpg'%}" alt="">
+            </div>
+        </div>
+        <div class="siteTitle">
+
+            <p>
+                <strong>{{ title }}</strong>- это небольшой, но очень тёплый и уютный магазинчик, который влюбляет в
+                суккуленты!<br clear>
+                <span>Мы - ваши проводники в большой мир маленьких суккулентов.</span>
+            </p>
+        </div>
+    </section>
+    <section>
+        <div class="productTape">
+            <div class="productTapeTitle">
+                <h2>Самые популярные товары</h2>
+            </div>
+            <div class="popularProducts">
+                <article class="popularItem">
+
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+
+</main>
+
+{% endblock %}

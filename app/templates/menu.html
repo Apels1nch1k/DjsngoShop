@@ -1,0 +1,35 @@
+{% load static %}
+
+<section id="modalMenu">
+    <div class="menu">
+        <div class="menuTitle">
+            <div id="menuBtnClose">
+                <img src="{% static 'icons/close.svg' %}" alt="" class="menuClose">
+            </div>
+
+            <div class="menuTitleList">
+                <div>
+                    <ul>
+                        <li><a class="menuTitleListHome">Главная</a></li>
+                        <li><a class="menuTitleListShop">Магазин</a></li>
+                        <li><a class="menuTitleListDelivery">Доставка</a></li>
+                        <li><a class="menuTitleListContact">Контакты</a></li>
+                        {% if user.is_anonymous %}
+                            <li><a id="menuBtnOpenRegAndAuth">Войти</a></li>
+                        {% else %}
+                            <li><a id="menuBtnOpenRegAndAuth" href="{% url 'logout' %}">Выход</a></li>
+                        {% endif %}
+                        
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="menuPhoto">
+            <img src="{% static '/assets/mainPhoto.jpg' %}" alt="" id="menuMainPhoto">
+        </div>
+        {% if user.is_anonymous %}
+            {% include 'authorization/RegAndAuth.html' %}
+        {% endif %}
+    </div>
+</section>

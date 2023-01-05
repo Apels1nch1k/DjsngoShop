@@ -1,0 +1,20 @@
+{% load static %}
+
+
+
+<div id="RegAndAuth">
+    <div class=" flex ">
+        <div id="closeRegAndAuth">
+            <img src="{% static '/icons/arrowLeft.svg'%}" alt="">
+        </div>
+
+        <div class="Forms">
+            <div class="PanelRegAndAuth">
+                <a id="OpenSingIn">Вход</a>
+                <a id="OpenSingUp">Регистрация</a>
+            </div>
+        {% include 'authorization/SingUp.html'%}
+        {% include 'authorization/SingIn.html'%}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{% load static %}
+
+
+<form id="SingUp" action="{% url 'singup' %}" method="POST">
+    {% csrf_token %}
+
+    {% for fields in formsingup %}
+    <div class="input-box">
+        <p class="errorText"></p>
+        {{fields}}
+
+    </div>
+    {% endfor %}
+    <button type='submit' class="btn-green">Зарегистрироваться</button>
+</form>

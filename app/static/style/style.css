@@ -1,37 +1,454 @@
-*{
-   margin: 0px;
-   padding: 0px;
-   box-sizing: border-box;
-   
+@import url('./animate.css');
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat/static/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-header{
-    position: absolute;
-    display: flex;
-    float: left;
-    height: 100%;
-    width: 15%;
-    background-color: rgba(128, 128, 128, 0.377);
-    justify-content: center;
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat/static/Montserrat-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
 }
 
-.LogoShop{
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-}
-.SuMarketLogo {
-    width: 100px;
-    height: 100px;
-    color: black;
-}
-nav ul{
-    list-style: none;
-}
-nav ul li a{
-    font-size: 20px;
-    text-decoration: none;
-    color: brown;
-    margin-top: 5px;
+@font-face {
+    font-family: 'Unbounded';
+    src: url('../fonts/Unbounded/Unbounded-VariableFont_wght.ttf') format('truetype');
     font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Unbounded';
+    src: url('../fonts/Unbounded/static/Unbounded-Bold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: bold;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+body {
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    transition: .3s;
+    user-select: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+.flex {
+    display: flex;
+}
+
+/* #6aa172 */
+/* Шапка сайта (header) */
+
+header {
+    z-index: 3;
+    background: white;
+    position: fixed;
+    width: 100vw;
+}
+
+.headerSucculentum {
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+    height: 6rem;
+    padding: 2rem 3rem;
+}
+
+
+
+.titleSucculentum h1 {
+    color: #6aa172;
+    font-family: 'Unbounded';
+    font-style: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+}
+
+.titleSucculentum:hover {
+    opacity: 70%;
+}
+
+.SucculentumCart {
+    float: right;
+}
+
+.SucculentumCart img,
+.SucculentumMenu img {
+    fill: "#6aa172";
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.SucculentumCart img:hover,
+.SucculentumMenu img:hover {
+    opacity: 60%;
+}
+
+
+/* модальное окно корзины (cart.html)*/
+
+#cartModal {
+    border: 1px solid #6aa172;
+    position: fixed;
+    width: 25vw;
+    height: 100%;
+    display: none;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    background: white;
+}
+
+#cartModal.close {
+    animation: animateSlideCartClose .4s linear forwards;
+}
+
+#cartModal.open {
+    animation: animateSlideCart .4s linear forwards;
+}
+
+#cart {
+    padding: 5%;
+
+}
+
+.cartHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cartTitle {
+    font-family: 'Unbounded';
+    font-style: normal;
+    letter-spacing: 4px;
+}
+
+.cartClose img {
+    width: 40px;
+    height: 40px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.cartClose img:hover {
+    opacity: 60%;
+}
+
+/* модальное окно меню (menu.html)*/
+
+
+#modalMenu {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    top: 200%;
+    right: 0;
+    z-index: 100;
+    background: #35533a;
+}
+
+#modalMenu.openMenu {
+    animation: animateSlideMenuUp .7s linear forwards;
+}
+
+#modalMenu.closeMenu {
+    animation: animateSlideMenuClose .5s linear forwards;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuClose {
+    cursor: pointer;
+    user-select: none;
+    fill: #6aa172;
+    margin: 20px;
+    padding: 10px;
+}
+
+.menuClose:hover {
+    transition: .3s;
+    opacity: 60%;
+}
+
+.menuTitleList {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15vh;
+}
+
+
+.menuTitleList ul li {
+
+    margin-top: 40px;
+
+}
+
+.menuTitleList a {
+    font-family: 'Unbounded';
+    font-size: 30px;
+    color: #6aa172;
+    font-weight: 800;
+    user-select: none;
+    letter-spacing: 2px;
+    transition: .4s;
+    cursor: pointer;
+}
+
+
+.menuTitleList ul a:hover {
+    opacity: 60%;
+}
+
+.menuPhoto img {
+    width: 50vw;
+    height: 100vh;
+}
+
+
+
+/* модальное окно авторизации и регистрации (RegAndAuth.html)*/
+
+#RegAndAuth {
+    z-index: 101;
+    background: white;
+    height: 100vh;
+    width: 50vw;
+    position: absolute;
+    display: none;
+    right: 0;
+}
+
+#RegAndAuth.RegAndAuthOpen {
+    animation: animateSlideRegAndAuth .7s linear forwards;
+}
+
+#RegAndAuth.RegAndAuthClose {
+    animation: animateSlideRegAndAuthClose .5s linear forwards;
+}
+
+#closeRegAndAuth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 2vw;
+    transition: .2s;
+    cursor: pointer;
+}
+
+
+
+#closeRegAndAuth:hover {
+    background: rgba(128, 128, 128, 0.404);
+}
+
+
+/* Регистрация (SingUp.html) */
+
+.Forms {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    width: 48vw;
+    flex-direction: column;
+}
+
+
+.PanelRegAndAuth a:hover {
+    opacity: 70%;
+}
+
+#OpenSingIn {
+    padding: 1px 1vw;
+    border-bottom: 2px solid #35533a;
+    cursor: pointer;
+    width: 5vw;
+}
+
+
+#OpenSingUp {
+    padding: 1px 1vw;
+    cursor: pointer;
+    width: 5vw;
+}
+
+#SingUp {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#SingUp.animateSingUpOpen {
+    animation: animateSingUpOpen .5s linear forwards;
+}
+
+
+.agreedInput {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #35533a;
+}
+
+
+.input-box {
+    margin: 3vh 0;
+    word-wrap: break-word;
+}
+
+.input-box input {
+    width: 18vw;
+    height: 3vh;
+}
+
+.btn-green {
+    padding: 1vh 2vw;
+    background: #35533a;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.btn-green:hover {
+    opacity: 80%;
+}
+
+
+/* Вход (SingIn.html) */
+
+#SingIn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#SingIn.animateSingInOpen {
+    animation: animateSingInOpen .5s linear forwards;
+}
+
+
+/* Валидация */
+
+
+.errorInput {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #691f1f;
+}
+
+.errorText {
+    color: #691f1f;
+    font-size: 12px;
+
+}
+
+
+/* Главная страница (index.html) */
+
+
+.wrapperIndex {}
+
+.MainPhoto {
+    max-width: 100vw;
+    position: relative;
+    height: 60vh;
+    justify-content: center;
+}
+
+.MainPhoto img {
+    object-fit: cover;
+    width: 100vw;
+    height: 60vh;
+}
+
+.siteTitle {
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    line-height: 5vh;
+}
+
+.siteTitle strong {
+    text-transform: uppercase;
+    font-family: 'Unbounded';
+}
+
+.siteTitle p {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.siteTitle span {
+    margin-left: 12vw;
+}
+
+.productTape {
+    margin-top: 25vh;
+    width: 100vw;
+    background: #6aa172;
+    height: 70vh;
+}
+
+.productTapeTitle {
+    display: flex;
+    justify-content: center;
+}
+
+.productTapeTitle h2 {
+    color: #fff;
+    font-size: 30px;
+    margin-top: 5vh;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'Unbounded';
+}
+
+.popularProducts {
+    background: #fff;
+    width: 90vw;
+    height: 40vh;
+    margin: 5vh 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popularItem {
+    height: 30vh;
+    width: 20vw;
+    border: 0.4rem solid #6aa172;
+    margin: 0 3vw;
 }
