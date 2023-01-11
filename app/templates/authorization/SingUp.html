@@ -1,7 +1,7 @@
 {% load static %}
 
 
-<form id="SingUp" action="{% url 'singup' %}" method="POST">
+<form id="SingUp" action="{% url 'users:singup' %}" method="POST">
     {% csrf_token %}
 
     {% for fields in formsingup %}

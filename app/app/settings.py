@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     
     
     'users.apps.UsersConfig',
-    'shop.apps.ShopConfig'
+    'shop.apps.ShopConfig',
+    'cart.apps.CartConfig'
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,7 @@ TEMPLATES = [
                 
                 'app.context_processors.singup',
                 'app.context_processors.singin',
+                'app.context_processors.product',
             ],
         },
     },
@@ -86,7 +88,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 
 
-
+# CART_SESSION_ID = 'cart'
 
 
 # Database
@@ -97,12 +99,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ShopDataBase',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ShopDB',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -133,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 

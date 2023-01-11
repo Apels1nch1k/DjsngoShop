@@ -11,13 +11,13 @@
                 <div>
                     <ul>
                         <li><a class="menuTitleListHome">Главная</a></li>
-                        <li><a class="menuTitleListShop">Магазин</a></li>
+                        <li><a class="menuTitleListShop" href="{% url 'shop:shop' %}">Магазин</a></li>
                         <li><a class="menuTitleListDelivery">Доставка</a></li>
                         <li><a class="menuTitleListContact">Контакты</a></li>
                         {% if user.is_anonymous %}
                             <li><a id="menuBtnOpenRegAndAuth">Войти</a></li>
                         {% else %}
-                            <li><a id="menuBtnOpenRegAndAuth" href="{% url 'logout' %}">Выход</a></li>
+                            <li><a id="menuBtnOpenRegAndAuth" href="{% url 'users:logout' %}">Выход</a></li>
                         {% endif %}
                         
                     </ul>

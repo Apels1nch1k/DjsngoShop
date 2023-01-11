@@ -5,6 +5,29 @@
 
 {% block content%}
 
+<main class="wrapperShop">
+    <section class="filterShop container">
+        <div class="searchShop">
+            <!-- <div class="iconsSearch">
+                <img src="{% static 'icons/search.svg' %}" alt="">
+            </div> -->
+            <form action="{% url 'shop:search' %}" id="search" method="post">
+                {% csrf_token %}
+                {{ searchForm.search }}
+            </form>
+
+        </div>
+        <div class="catalogShop" id="catalog">
+            <a>каталог</a>
+        </div>
+    </section>
+    <section class="allProductsShop container">
+
+        {% for product in products %}
+            {% include 'shop/product.html' with type="product" id=product.id %}
+        {% endfor %}
+    </section>
+</main>
 
 
 {% endblock %}
