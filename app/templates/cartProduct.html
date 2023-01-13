@@ -1,19 +1,17 @@
 {% load static %}
 
-    <article class="cartProduct">
-        <div class="cartProductImage">
-            <img src="{{ image}}" alt="">
-        </div>
-        <div class="cartProductInfo">
-            <span class="cartProductName">{{ name }}</span>
-            <form action="" method="post">
-                
-            </form>
-            <a href=""> Удалить</a>
-            <span> Количесвто </span>
-            <span> {{ price }}</span>
+<article class="cartProduct">
+    <div class="cartProductImage">
+        <img src="{{ image}}" alt="">
+    </div>
+    <div class="cartProductInfo">
+        <span class="cartProductName">{{ name }}</span>
 
-        </div>
-    </article>
-
-
+        <span> Количесвто </span>
+        <span> Цена : {{ price }}</span>
+        <form action="{% url 'cart:removecart' id %}" method="post" class="removeCart">
+            {% csrf_token %}
+            <button type="submit"> Удалить</button>
+        </form>
+    </div>
+</article>

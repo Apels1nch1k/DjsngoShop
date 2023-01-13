@@ -6,12 +6,12 @@ from shop.models import *
 
 import json
 
-class Cart(TemplateView):
-    template_name = "cart.html"
+# class Cart(TemplateView):
+#     template_name = "cart.html"
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         return context
     
     
 class AddCart(FormView):
@@ -31,23 +31,22 @@ class AddCart(FormView):
             'name': request.POST.get('name'),
             'image': request.POST.get('image'),
             'price': request.POST.get('price'),
+            'numberCArt': len(self.request.session['cart'])
         }
         print(add_data)
         # print( [i['id'] for i in  request.session['cart']])
         if not product_exist:
             request.session['cart'].append(add_data)
             request.session.modified = True
-
+            
         return render(request, "cartProduct.html", context=add_data)
         
 class RemoveCart(FormView):
-    
-    def post(self, request, id) -> HttpResponse:
-        
+    def post(self, request, id):
         for product in self.request.session['cart']:
-            if product['id'] == id and product['type'] == self.request.POST.get['type']:
+            if product['id'] == int(id):
                 product.clear()
-        
+                      
         while {} in self.request.session['cart']:
             self.request.session['cart'].remove({})
         
@@ -55,8 +54,8 @@ class RemoveCart(FormView):
             del self.request.session['cart']
             
             
-        self.request.session.modified = True
-        
-        return HttpResponse("Удаленно")
+        request.session.modified = True
+     
+        return JsonResponse({'data':"Удаленно"})
 
     

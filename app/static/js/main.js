@@ -21,9 +21,10 @@ const search = document.getElementById('id_search')
 const productAll = document.getElementsByClassName('allProductsShop')[0]
 
 const CartAdd = document.querySelectorAll(".CartAdd")
+const numberCart = document.getElementById("numberCart")
 const cart = document.getElementsByClassName('cartBody')[0]
+const CartRemove = document.querySelectorAll('.removeCart')
 
-console.log(cart)
 
 
 cartBtnOpen.onclick = function () {
@@ -227,17 +228,43 @@ CartAdd.forEach(el => {
             }
 
         })
-            .then((response) => response.text())
+            .then(function (response) {
+                console.log(response.json())
+                response.text()
+            })
             .then(function (data) {
-                console.log(data)
+                console.log(data['name'])
                 cart.innerHTML += data
+
             })
 
     })
 })
 
 
+console.log(CartRemove)
+CartRemove.forEach(el => {
+    el.addEventListener("submit", function (e) {
+        e.preventDefault()
+        data = new FormData(this)
+        console.log(this)
+        fetch(this.action, {
+            method: this.method,
+            body: data,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            }
 
+        })
+            .then((response) => response.json())
+            .then(function (data) {
+                console.log(data['data'])
+                console.log(this)
+                el.parentNode.parentNode.remove()
+            })
+
+    })
+})
 
 
 

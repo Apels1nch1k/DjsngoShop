@@ -21,6 +21,7 @@
         </div>
         <div class="SucculentumCart" id="cartBtnOpen">
             <img src="{% static 'icons/cart.svg' %}" alt="">
+            <span id="numberCart">{{ request.session.cart|length  }} </span>
         </div>
     </header>
     {% include 'cart.html' %}

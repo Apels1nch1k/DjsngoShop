@@ -169,21 +169,24 @@ header {
 .cartBody {
     display: flex;
     flex-wrap: wrap;
+    row-gap: 2vh;
     padding-top: 2vw;
     overflow-y: scroll;
-    height: 75vh;
     scrollbar-width: thin;
+    max-height: 75vh;
 }
 
 /* Товар в корзине (cartProduct.html) */
 
 .cartProduct {
     border: 1px solid #35533a;
-    padding: 1vh;
+    padding: 0.5vh;
     width: 30vw;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     height: 16vh;
+    column-gap: 1vh;
 }
 
 .cartProductImage img {
@@ -195,15 +198,28 @@ header {
     font-size: 1.5vh;
 }
 
+.removeCart button {
+    outline: none;
+    border: none;
+    background: white;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.removeCart button:hover {
+    color: red;
+}
+
 .cartProductSum {
     position: fixed;
     bottom: 0px;
 }
 
+
+
 .ordering {
     position: absolute;
     bottom: 0px;
-    row-gap: .5vh;
 }
 
 .ordering span {
@@ -227,6 +243,8 @@ header {
 
     opacity: 70%;
 }
+
+
 
 /* модальное окно меню (menu.html)*/
 
