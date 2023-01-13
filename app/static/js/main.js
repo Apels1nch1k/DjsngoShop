@@ -226,18 +226,12 @@ CartAdd.forEach(el => {
             headers: {
                 'X-CSRFToken': getCookie('csrftoken'),
             }
-
         })
-            .then(function (response) {
-                console.log(response.json())
-                response.text()
-            })
+            .then((response) => response.text())
             .then(function (data) {
-                console.log(data['name'])
                 cart.innerHTML += data
-
+                console.log()
             })
-
     })
 })
 

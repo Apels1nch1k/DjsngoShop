@@ -22,7 +22,7 @@ class AddCart(FormView):
             request.session['cart'] = list()
         else:
             request.session['cart'] = list(request.session['cart'])
-        product_exist = next((product for product in request.session['cart'] if product["type"] == request.POST.get('type') and product['id'] == id), False)
+        product_exist = next((product for product in request.session['cart'] if product["type"] == request.POST.get('type') and product['id'] == int(id)), False)
         
 
         add_data = {
@@ -38,7 +38,7 @@ class AddCart(FormView):
         if not product_exist:
             request.session['cart'].append(add_data)
             request.session.modified = True
-            
+        
         return render(request, "cartProduct.html", context=add_data)
         
 class RemoveCart(FormView):
