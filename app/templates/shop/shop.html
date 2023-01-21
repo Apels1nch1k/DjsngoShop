@@ -24,7 +24,7 @@
     <section class="allProductsShop container">
 
         {% for product in products %}
-            {% include 'shop/product.html' with type="product" id=product.id %}
+            {% include 'shop/product.html' with id=product.id %}
         {% endfor %}
     </section>
 </main>

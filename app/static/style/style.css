@@ -62,6 +62,9 @@ li {
     max-width: 80vw;
 }
 
+.hidden {
+    display: none;
+}
 
 /* #6aa172 */
 /* Шапка сайта (header) */
@@ -194,6 +197,13 @@ header {
     width: 8vw;
 }
 
+/* .cartProductInfo {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2px;
+} */
+
+
 .cartProductName {
     font-size: 1.5vh;
 }
@@ -227,9 +237,11 @@ header {
 }
 
 
-.ordering button {
+.ordering a {
+    display: inline-block;
     height: 10vh;
     width: 25vw;
+    padding: 4vh 7vw;
     background: #35533a;
     border: none;
     font-size: 1vw;
@@ -239,7 +251,7 @@ header {
     cursor: pointer;
 }
 
-.ordering button:hover {
+.ordering a:hover {
 
     opacity: 70%;
 }
@@ -628,4 +640,65 @@ header {
 .productInfo {
     display: flex;
     justify-content: space-between;
+}
+
+/* страница оформление заказа (orders.html) */
+
+.wrapperOrders {
+    padding: 0px 20vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 10vh;
+}
+
+
+
+.orders {
+    width: 80vw;
+    padding: 0px 15vh;
+}
+
+
+.orderTable {
+    border-collapse: collapse;
+}
+
+.orderTable table,
+.orderTable th,
+.orderTable td {
+    border: 1px solid #6aa172;
+}
+
+.orderTable th,
+.orderTable td {
+    width: 15vw;
+}
+
+.orderTable td {
+    padding-left: 10vh;
+}
+
+.orderTable caption {
+    font-size: 3vh;
+}
+
+.orderImg {
+    width: 15vw;
+    height: 20vh;
+}
+
+.TotalPriceOrder {
+    display: inline-block;
+}
+
+/* Профиль (Profil) */
+
+.wrapperProfil {
+
+    padding: 0px 20vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 10vh;
 }

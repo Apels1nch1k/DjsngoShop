@@ -1,9 +1,14 @@
+from django.shortcuts import redirect
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth import authenticate, login
+from django.views.generic import TemplateView, ListView, FormView
+from orders.models import Order
+
+from cart.models import CartUser
 from .forms import *
 
 class SingUpView(CreateView):
@@ -11,8 +16,10 @@ class SingUpView(CreateView):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            authenticate(self.request,username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+            authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             form.save()
+            user = User.objects.get(username=form.cleaned_data['username'])
+            CartUser.objects.create(user=user)
             return JsonResponse({'success': 'ok'})
         else:
             print(form.cleaned_data)
@@ -26,6 +33,33 @@ class SingInView(LoginView):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return JsonResponse({'success': 'ok'})
+
+            self.request.session['cart'] = CartUser.objects.get(user=user).pcart
+            
+            return redirect(reverse_lazy('shop:home'))
         else:
             return JsonResponse({'errors': form.errors })
+
+
+
+
+class Logout(LogoutView):
+    pass
+
+
+
+class Profil(ListView):
+    template_name = "profil/profil.html"
+    model = Order
+    context_object_name = 'orderUser'
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Профиль"
+        return context
+    
+    def get_queryset(self):
+        
+        queryset = Order.objects.filter(user=self.request.user)
+        return queryset

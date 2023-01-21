@@ -25,7 +25,7 @@ const numberCart = document.getElementById("numberCart")
 const cart = document.getElementsByClassName('cartBody')[0]
 const CartRemove = document.querySelectorAll('.removeCart')
 
-
+const TotalPrice = document.getElementById("TotalPrice")
 
 cartBtnOpen.onclick = function () {
     cartModal.classList.add('open')
@@ -230,7 +230,8 @@ CartAdd.forEach(el => {
             .then((response) => response.text())
             .then(function (data) {
                 cart.innerHTML += data
-                console.log()
+                el.remove()
+                console.log(window.sessionStorage.getItem('sessionid'))
             })
     })
 })

@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+
 # USER
 
 AUTH_USER_MODEL = 'users.User'
@@ -47,7 +49,8 @@ INSTALLED_APPS = [
     
     'users.apps.UsersConfig',
     'shop.apps.ShopConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +82,8 @@ TEMPLATES = [
                 'app.context_processors.singup',
                 'app.context_processors.singin',
                 'app.context_processors.product',
+                'app.context_processors.addcart',
+                'app.context_processors.updateCart',
             ],
         },
     },
@@ -88,7 +93,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 
 
-# CART_SESSION_ID = 'cart'
+CART_SESSION_ID = 'cart'
 
 
 # Database

@@ -10,10 +10,13 @@
             <div class="menuTitleList">
                 <div>
                     <ul>
-                        <li><a class="menuTitleListHome">Главная</a></li>
+                        <li><a class="menuTitleListHome" href="{% url 'shop:home' %}">Главная</a></li>
                         <li><a class="menuTitleListShop" href="{% url 'shop:shop' %}">Магазин</a></li>
                         <li><a class="menuTitleListDelivery">Доставка</a></li>
                         <li><a class="menuTitleListContact">Контакты</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a class="menuTitleListProfil" href="{% url 'users:profil' %}" >Профиль</a></li>
+                        {% endif %}
                         {% if user.is_anonymous %}
                             <li><a id="menuBtnOpenRegAndAuth">Войти</a></li>
                         {% else %}

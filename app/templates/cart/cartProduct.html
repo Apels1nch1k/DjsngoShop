@@ -1,0 +1,20 @@
+{% load static %}
+
+<article class="cartProduct">
+    <div class="cartProductImage">
+        <img src="{{ image }}" alt="">
+    </div>
+    <div class="cartProductInfo">
+        <span class="cartProductName">{{ name }}</span>
+        <span> Количесвто :{{ quantity }}<br>
+            Цена : {{ price }}</span>
+        <form action="{% url 'cart:addcart' id %}" method="post" >
+            {% csrf_token %}
+            {{addcart}}
+        </form> 
+        <form action="{% url 'cart:removecart' id %}" method="post" class="removeCart">
+            {% csrf_token %}
+            <button type="submit"> Удалить</button><br>
+        </form>  
+    </div>
+</article>

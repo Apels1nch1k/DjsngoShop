@@ -4,23 +4,15 @@
     </div>
     <div class="productInfo">
         <h4 class="productName">{{product.name}}</h4>
-
+    
         <p class="productPrice"> {{product.price}} руб </p>
 
-            {% for i in request.session.cart %}
-                {% if i.id != id%}
-                <form action="{% url 'cart:addcart' id %}" method="POST" class="CartAdd">
-                    {% csrf_token %}
-                    <input type="hidden" name="id" value="{{ id }}">
-                    <input type="hidden" name="type" value="{{ type }}">
-                    <input type="hidden" name="name" value="{{product.name}}">
-                    <input type="hidden" name="image" value="{{ product.image.url}}">
-                    <input type="hidden" name="price" value="{{product.price}}">
-                    <button type="submit" class="BTNadd" id="add">В корзину</button>
-                </form>
-                {% endif%}
-            {% endfor %}
-
+            <form action="{% url 'cart:addcart' id %}" method="POST" class="CartAdd">
+                {% csrf_token %}
+                <p class="hidden">{{addcart.quantity}}</p>
+                {{addcart.updaye}}
+                <button type="submit" class="BTNadd" id="add">В корзину</button>
+            </form>
 
     </div>
 

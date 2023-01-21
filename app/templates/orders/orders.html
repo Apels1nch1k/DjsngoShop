@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<main class="wrapperOrders">
+    <div class="orders">
+        <table class="orderTable">
+            <caption>Оформление заказа</caption>
+            <tr>
+                <th>Название</th>
+                <th>Фотография</th>
+                <th>Цена</th>
+                <th>Количество</th>
+            </tr>
+        {% for i in cart %}
+        {% with price=i.product.price image=i.product.image.url name=i.product.name quantity=i.quantity id=i.product.id%}
+
+            <tr><td>{{ name }}</td><td><img src="{{ image }}" class="orderImg"/></td><td>{{ price }}</td><td>{{ quantity }}</td></tr>
+
+        {% endwith %}
+        {% endfor %}
+        <table>
+
+    </div>        
+    <div class="TotalPriceOrder"> Сумма за всех товары: {{ cart.get_total_price}}</div>
+        <div>
+            <form action="{% url 'orders:create' %}" method="post">
+                {% csrf_token %}
+                {{ formOrder }}
+                <input type="submit" value="Оформить заказ">
+            </form>
+        </div>
+</main>
+
+
+{% endblock %}

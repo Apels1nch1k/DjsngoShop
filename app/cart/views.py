@@ -1,61 +1,50 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic.edit import BaseFormView
 from django.views.generic import TemplateView, FormView
 from shop.models import *
+from .forms import CartAddProductForm
+from .cart import Cart
+from django.core import serializers
+from .models import *
+from users.models import User
 
-import json
 
-# class Cart(TemplateView):
-#     template_name = "cart.html"
-    
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
-    
-    
 class AddCart(FormView):
+    form_class = CartAddProductForm
     
-    
-    def post(self, request, id):
-        if not request.session.get('cart'):
-            request.session['cart'] = list()
-        else:
-            request.session['cart'] = list(request.session['cart'])
-        product_exist = next((product for product in request.session['cart'] if product["type"] == request.POST.get('type') and product['id'] == int(id)), False)
+    def post(self, request, product_id):
+        cart = Cart(self.request)
+        form = self.form_class(self.request.POST)
+        product = get_object_or_404(Product, id=product_id)
+        context= Product.objects.filter(id=product_id).values('id','name', 'image', 'price')[0]
+        if form.is_valid():
+            cd = form.cleaned_data
+            cart.add(product=product, quantity=cd["quantity"], update_quantity=cd['update'])
         
-
-        add_data = {
-            'id': int(id),
-            'type': request.POST.get('type'),
-            'name': request.POST.get('name'),
-            'image': request.POST.get('image'),
-            'price': request.POST.get('price'),
-            'numberCArt': len(self.request.session['cart'])
+        data = {
+            "id" : context['id'],
+            'name' : context['name'],
+            "image" :  'media/' + context['image'],
+            "price" : context['price']
         }
-        print(add_data)
-        # print( [i['id'] for i in  request.session['cart']])
-        if not product_exist:
-            request.session['cart'].append(add_data)
-            request.session.modified = True
-        
-        return render(request, "cartProduct.html", context=add_data)
+        user = CartUser.objects.filter(user=self.request.user)
+        user.update(pcart=self.request.session['cart'])
+
+        return render(request, "cart/cartProduct.html", context=data)
         
 class RemoveCart(FormView):
-    def post(self, request, id):
-        for product in self.request.session['cart']:
-            if product['id'] == int(id):
-                product.clear()
-                      
-        while {} in self.request.session['cart']:
-            self.request.session['cart'].remove({})
+    def post(self, request, product_id):
         
-        if not self.request.session['cart']:
-            del self.request.session['cart']
-            
-            
-        request.session.modified = True
+        cart = Cart(request)
+        product = get_object_or_404(Product, id=product_id)
+        cart.remove(product)
+        
+        user = CartUser.objects.filter(user=self.request.user)
+        user.update(pcart=self.request.session['cart'])
+                
+        
+        
      
         return JsonResponse({'data':"Удаленно"})
 
-    
