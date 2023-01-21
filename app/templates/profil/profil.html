@@ -5,15 +5,21 @@
 {% block content %}
 
 <main class="wrapperProfil">
-    {% for i in orderUser %}
-
+    {% for i in userOrder %}
+        
         {{ i.get_total_cost }}
         {{ i.city }}
 
         {{ i.address }}
         {{ i.paid }}
         {{ i.status_order }}
+        {% for product in orderProduct%}
+            <img src="/media/{{product.product.image}}" class="profilOrderImage"/>
+            
+            {{product.product}}
+            {{product.quantity}}
 
+        {% endfor %}
     {% endfor %}
 </main>
 

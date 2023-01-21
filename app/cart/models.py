@@ -8,6 +8,6 @@ from shop.models import Product
 
 class CartUser(models.Model):
     user = models.OneToOneField(to=User, related_name="cartUser", verbose_name="Пользователя", on_delete=models.CASCADE, null=True)
-    pcart = models.JSONField(null=True)
+    pcart = models.JSONField(null=True, blank=True)
     
     

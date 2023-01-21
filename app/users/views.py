@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView, ListView, FormView
-from orders.models import Order
+from orders.models import Order, OrderProduct
 
 from cart.models import CartUser
 from .forms import *
@@ -50,16 +50,22 @@ class Logout(LogoutView):
 
 class Profil(ListView):
     template_name = "profil/profil.html"
-    model = Order
-    context_object_name = 'orderUser'
     
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Профиль"
+        # context['userOrder'] = Order.objects.get(user=self.request.user)
+        # context['orderProduct'] = OrderProduct.objects.filter(order=Order.objects.get(user=self.request.user))
         return context
     
-    def get_queryset(self):
-        
-        queryset = Order.objects.filter(user=self.request.user)
-        return queryset
+    def get(self, request, *args, **kwargs) :
+        userOrder = Order.objects.filter(user=self.request.user)
+
+        orderProduct = OrderProduct.objects.filter(order=[ i for i in userOrder][0])
+        context = {
+            'userOrder': userOrder,
+            'orderProduct': orderProduct,
+        }
+        return render(request, self.template_name, context)
+    

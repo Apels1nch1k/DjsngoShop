@@ -702,3 +702,9 @@ header {
     justify-content: center;
     top: 10vh;
 }
+
+
+.profilOrderImage {
+    width: 20vw;
+    height: 25vh;
+}

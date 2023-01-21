@@ -6,14 +6,14 @@
         <h4 class="productName">{{product.name}}</h4>
     
         <p class="productPrice"> {{product.price}} руб </p>
-
+        {% if not id|stringformat:"s"  in request.session.cart  %}
             <form action="{% url 'cart:addcart' id %}" method="POST" class="CartAdd">
                 {% csrf_token %}
                 <p class="hidden">{{addcart.quantity}}</p>
                 {{addcart.updaye}}
                 <button type="submit" class="BTNadd" id="add">В корзину</button>
             </form>
-
+        {% endif %}
     </div>
 
 </article>
