@@ -5,22 +5,29 @@
 {% block content %}
 
 <main class="wrapperProfil">
+    <div class="profilOrderUser">
     {% for i in userOrder %}
-        
-        {{ i.get_total_cost }}
-        {{ i.city }}
+        <div class="userOrder">
+            <div class="">
+            <h4>Номер заказа:{{ i.id }}</h4>
+            {{ i.get_total_cost }}
+            {{ i.city }}
 
-        {{ i.address }}
-        {{ i.paid }}
-        {{ i.status_order }}
-        {% for product in orderProduct%}
-            <img src="/media/{{product.product.image}}" class="profilOrderImage"/>
-            
-            {{product.product}}
-            {{product.quantity}}
+            {{ i.address }}
+            {{ i.paid }}
+            {{ i.status_order }}
+            </div>
+            {% for product in i.product %}
+                <figure class="imageOrderUser">
 
-        {% endfor %}
+                    <img src="/media/{{product.product.image}}" class="profilOrderImage"/>
+                    <figcaption>{{product.product}}</figcaption> 
+                    <figcaption> Количество: {{product.quantity}}</figcaption> 
+                </figure>
+            {% endfor %}
+        </div>
     {% endfor %}
+    </div>
 </main>
 
 {%  endblock %}

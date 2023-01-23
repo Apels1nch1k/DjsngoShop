@@ -20,6 +20,11 @@ const searchform = document.getElementById('search')
 const search = document.getElementById('id_search')
 const productAll = document.getElementsByClassName('allProductsShop')[0]
 
+const btnCatalog = document.getElementById('catalog')
+const catalog = document.getElementById('catalogName')
+const btnCloseCatalog = document.getElementById('closeCatalog')
+
+
 const CartAdd = document.querySelectorAll(".CartAdd")
 const numberCart = document.getElementById("numberCart")
 const cart = document.getElementsByClassName('cartBody')[0]
@@ -264,5 +269,16 @@ CartRemove.forEach(el => {
 
 
 
+btnCatalog.onclick = function () {
+    // RegAndAuth.classList.remove('RegAndAuthClose')
+    // RegAndAuth.classList.add('RegAndAuthOpen')
+    catalog.style.display = "block";
+    closeCatalog.style.display = "block"
+    btnCatalog.style.display = "none"
+    btnCloseCatalog.onclick = function () {
+        closeCatalog.style.display = "none"
+        btnCatalog.style.display = "block"
+        setTimeout(() => catalog.style.display = "none", 200);
+    }
 
-
+}

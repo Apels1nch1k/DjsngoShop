@@ -62,10 +62,13 @@ class Profil(ListView):
     def get(self, request, *args, **kwargs) :
         userOrder = Order.objects.filter(user=self.request.user)
 
-        orderProduct = OrderProduct.objects.filter(order=[ i for i in userOrder][0])
+        
+        
+        orderProduct = OrderProduct.objects.filter(order=[ i for i in userOrder])
         context = {
             'userOrder': userOrder,
             'orderProduct': orderProduct,
         }
+        
         return render(request, self.template_name, context)
     

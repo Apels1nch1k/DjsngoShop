@@ -10,16 +10,10 @@ def singup(request):
 def singin(request):
     return {'formsingin': SingInForms(),}
 
-def product(request):
-    return {'products' : Product.objects.all()}
 
 def addcart(request):
     return {'addcart' : CartAddProductForm(), }
 
 def updateCart(request):
-    cart = Cart(request)
-    
-    # for item in cart:
-    #     item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update' : True})
-    
-    return {'cart' : cart, }
+
+    return {'cart' : Cart(request), }

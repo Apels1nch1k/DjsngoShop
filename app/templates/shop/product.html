@@ -7,7 +7,7 @@
     
         <p class="productPrice"> {{product.price}} руб </p>
         {% if not id|stringformat:"s"  in request.session.cart  %}
-            <form action="{% url 'cart:addcart' id %}" method="POST" class="CartAdd">
+            <form action="{% url 'cart:addcart' id %}" method="POST" class="CartAdd" id="add">
                 {% csrf_token %}
                 <p class="hidden">{{addcart.quantity}}</p>
                 {{addcart.updaye}}

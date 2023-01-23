@@ -5,13 +5,16 @@
         <img src="{{ image }}" alt="">
     </div>
     <div class="cartProductInfo">
-        <span class="cartProductName">{{ name }}</span>
-        <span> Количесвто :{{ quantity }}<br>
-            Цена : {{ price }}</span>
-        <form action="{% url 'cart:addcart' id %}" method="post" >
-            {% csrf_token %}
-            {{addcart}}
-        </form> 
+        <p class="cartProductName">{{ name }}</p>
+        <p> Цена : {{ price }}</p>
+        <div class="cartProductNameQuantity">
+            Количесвто :
+            <form action="{% url 'cart:addcart' id %}" method="post" >
+                {% csrf_token %}
+                {{addcart}}
+                <input type="submit" />
+            </form>
+        </div>
         <form action="{% url 'cart:removecart' id %}" method="post" class="removeCart">
             {% csrf_token %}
             <button type="submit"> Удалить</button><br>

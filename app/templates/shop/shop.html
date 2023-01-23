@@ -8,18 +8,27 @@
 <main class="wrapperShop">
     <section class="filterShop container">
         <div class="searchShop">
-            <!-- <div class="iconsSearch">
+            {% comment %} <div class="iconsSearch">
                 <img src="{% static 'icons/search.svg' %}" alt="">
-            </div> -->
+            </div> {% endcomment %}
             <form action="{% url 'shop:search' %}" id="search" method="post">
                 {% csrf_token %}
                 {{ searchForm.search }}
-            </form>
+                
+            </form>        
+            
+            <div >
+                <img src="{% static "icons/menu.svg" %}" id="catalog"/>
+            </div>
+            <div >
+                <img src="{% static "icons/close.svg" %}"  id="closeCatalog"/>
+            </div>
+        </div>
 
+        <div class="catalogShopName" id="catalogName">
+            asdasd
         </div>
-        <div class="catalogShop" id="catalog">
-            <a>каталог</a>
-        </div>
+
     </section>
     <section class="allProductsShop container">
 

@@ -81,7 +81,6 @@ TEMPLATES = [
                 
                 'app.context_processors.singup',
                 'app.context_processors.singin',
-                'app.context_processors.product',
                 'app.context_processors.addcart',
                 'app.context_processors.updateCart',
             ],

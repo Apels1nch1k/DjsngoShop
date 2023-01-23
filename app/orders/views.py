@@ -28,7 +28,7 @@ class CreateOrder(CreateView):
                     quantity=i['quantity'],
                 )
             cart.clear()
-        return redirect(reverse_lazy('shop:home'))
+        return redirect(reverse_lazy('users:profil'))
         
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

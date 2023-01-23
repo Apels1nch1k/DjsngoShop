@@ -28,18 +28,32 @@ class SearchView(FormView):
             
         return HttpResponse(search) 
     
-class ShopView(TemplateView):
+class ShopView(ListView):
     template_name = 'shop/shop.html'
-    
+    context_object_name = 'products'
 
     
     def get_context_data(self ,*args, **kwargs):
         context = super().get_context_data(*args,**kwargs)
         context['searchForm'] = SearchForm()
         context['title'] = 'Магазин'
+        # context['products'] = Product.objects.all()
         return context
     
+    def get_queryset(self):
+        return Product.objects.all()
+    
 
+class CategoryView(ListView):
+    template_name = 'shop/shop.html'
+    context_object_name = 'products'
     
     
+    def get_queryset(self):
+        return Product.objects.filter(cat__slug=self.kwargs['cat_slug'])
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Категория'
+        
+        return context

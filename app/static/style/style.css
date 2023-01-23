@@ -208,6 +208,10 @@ header {
     font-size: 1.5vh;
 }
 
+.cartProductNameQuantity {
+    display: inline-block;
+}
+
 .removeCart button {
     outline: none;
     border: none;
@@ -576,14 +580,19 @@ header {
     height: 5vh;
 }
 
+.searchShop {
+    display: flex;
+    justify-items: center;
+}
+
 .searchShop input {
     display: flex;
     height: 5vh;
-    width: 70vw;
+    width: 80vw;
     align-items: center;
     border: 2px solid #6aa172;
-    border-radius: 4px 0 0 4px;
-    border-right: none;
+    border-radius: 4px 4px 4px 4px;
+    /* border-right: none; */
     font-size: 2vh;
     outline: none;
     transition: .3s;
@@ -591,23 +600,37 @@ header {
 
 }
 
-
-.catalogShop {
-    width: 10vw;
-    height: 5vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #6aa172;
-    transition: .3s;
+#catalog {
+    display: block;
+    position: absolute;
+    right: 10.5vw;
+    top: 0;
+    width: 2.3vw;
     cursor: pointer;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 0 4px 4px 0;
+    transition: .3s;
 }
 
-.catalogShop:hover {
+#catalog:hover {
     opacity: 80%;
+}
+
+#closeCatalog {
+    display: none;
+    position: absolute;
+    right: 10.5vw;
+    top: 0;
+    width: 2.3vw;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.catalogShopName {
+    position: absolute;
+    display: inline;
+    width: 80vw;
+    border: 1px solid #35533a;
+    top: 5vh;
+    display: none;
 }
 
 .iconsSearch {
@@ -705,6 +728,23 @@ header {
 
 
 .profilOrderImage {
-    width: 20vw;
+    width: 15vw;
     height: 25vh;
+}
+
+.profilOrderUser {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.userOrder {
+    display: inline-block;
+    width: 70vw;
+}
+
+.imageOrderUser {
+    width: 15vw;
+    display: inline-block;
 }

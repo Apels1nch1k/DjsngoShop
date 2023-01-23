@@ -26,7 +26,7 @@ class AddCart(FormView):
             "id" : context['id'],
             'name' : context['name'],
             "image" :  'media/' + context['image'],
-            "price" : context['price']
+            "price" : context['price'],
         }
         user = CartUser.objects.filter(user=self.request.user)
         user.update(pcart=self.request.session['cart'])
