@@ -29,6 +29,8 @@ const CartAdd = document.querySelectorAll(".CartAdd")
 const numberCart = document.getElementById("numberCart")
 const cart = document.getElementsByClassName('cartBody')[0]
 const CartRemove = document.querySelectorAll('.removeCart')
+const CartUpdate = document.querySelectorAll('.CartUpdate')
+
 
 const TotalPrice = document.getElementById("TotalPrice")
 
@@ -242,7 +244,6 @@ CartAdd.forEach(el => {
 })
 
 
-console.log(CartRemove)
 CartRemove.forEach(el => {
     el.addEventListener("submit", function (e) {
         e.preventDefault()
@@ -282,3 +283,25 @@ btnCatalog.onclick = function () {
     }
 
 }
+
+CartUpdate.forEach(el => {
+    el.addEventListener("submit", function (e) {
+        e.preventDefault()
+        data = new FormData(this)
+        fetch(this.action, {
+            method: this.method,
+            body: data,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            }
+
+        })
+            .then((response) => response.text())
+            .then(function (data) {
+                el.parentNode.parentNode.parentNode.remove()
+                cart.innerHTML += data
+
+            })
+
+    })
+})

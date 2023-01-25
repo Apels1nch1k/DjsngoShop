@@ -12,7 +12,6 @@
 
         </div>
         <div class="cartBody">
-            {{ request.session.cart }}
             {% for i in cart %}
                 {% with price=i.product.price image=i.product.image.url name=i.product.name quantity=i.quantity id=i.product.id %}
                     {% include "cart/cartProduct.html" %}

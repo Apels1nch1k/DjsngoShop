@@ -6,7 +6,6 @@ from django.views.generic import TemplateView, FormView
 from shop.models import *
 from .forms import CartAddProductForm
 from .cart import Cart
-from django.core import serializers
 from .models import *
 from users.models import User
 
@@ -28,9 +27,13 @@ class AddCart(FormView):
             'name' : context['name'],
             "image" :  'media/' + context['image'],
             "price" : context['price'],
+            "quantity": self.request.session['cart'][str(product_id)]['quantity']
         }
-        user = CartUser.objects.filter(user=self.request.user)
-        user.update(pcart=self.request.session['cart'])
+        if self.request.user.is_authenticated:
+            user = CartUser.objects.filter(user=self.request.user)
+            user.update(pcart=self.request.session['cart'])
+            
+        
         
         return render(request, "cart/cartProduct.html", context=data)
         
@@ -41,11 +44,10 @@ class RemoveCart(FormView):
         product = get_object_or_404(Product, id=product_id)
         cart.remove(product)
         
-        user = CartUser.objects.filter(user=self.request.user)
-        user.update(pcart=self.request.session['cart'])
-                
-        
-        
-     
+        if self.request.user.is_authenticated:
+            user = CartUser.objects.filter(user=self.request.user)
+            user.update(pcart=self.request.session['cart'])
+
+
         return JsonResponse({'data':"Удаленно"})
 

@@ -12,11 +12,30 @@
         <div class="productImage">
             <img src="{{ product.image.url }}" alt="">
         </div>
+        <div >
+            <div class="productName">
+                <h4>{{ product.name }}</h4>
+            </div>
+            <div class="addCart">
+                {% if not id|stringformat:"s"  in request.session.cart  %}
+                <form action="{% url 'cart:addcart' product.id %}" method="POST" class="CartAdd" id="add">
+                    {% csrf_token %}
+                    <p class="hidden">{{addcart.quantity}}</p>
+                    {{addcart.updaye}}
+                    <button type="submit" class="BTNadd" id="add">В корзину</button>
+                </form>
+                {% else %}
+                    <p>Уже в корзине </p>
+                {% endif %}
 
-        <div class="productName">
-            <h4>{{ product.name }}</h4>
+            </div>
+            <div class="productDescription">
+                <p>
+                    {{ product.description}}
+                </p>
+            <div>
         </div>
-
+    </div>
 
     </div>
 </main>

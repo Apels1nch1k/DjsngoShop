@@ -8,11 +8,11 @@
         <p class="cartProductName">{{ name }}</p>
         <p> Цена : {{ price }}</p>
         <div class="cartProductNameQuantity">
-            Количесвто :
-            <form action="{% url 'cart:addcart' id %}" method="post"  class="CartAdd">
+            Количесвто : {{quantity}}
+            <form action="{% url 'cart:update' id %}" method="post"  class="CartUpdate">
                 {% csrf_token %}
                 {{addcart}}
-                <input type="submit" />
+                <button type="submit" > обновить</button>
             </form>
         </div>
         <form action="{% url 'cart:removecart' id %}" method="post" class="removeCart">

@@ -64,10 +64,8 @@ class Profil(ListView):
 
         
         
-        orderProduct = OrderProduct.objects.filter(order=[ i for i in userOrder])
         context = {
             'userOrder': userOrder,
-            'orderProduct': orderProduct,
         }
         
         return render(request, self.template_name, context)

@@ -206,6 +206,12 @@ header {
 
 .cartProductName {
     font-size: 1.5vh;
+    color: black;
+    transition: .3s;
+}
+
+.cartProductName:hover{
+    opacity: 70%;
 }
 
 .cartProductNameQuantity {
@@ -633,6 +639,15 @@ header {
     display: none;
 }
 
+.catalogShopName a{
+    color: #35533a;
+    font-size: 1.5rem;
+}
+
+.catalogShopName a:hover{
+    opacity: 70%;
+}
+
 .iconsSearch {
     height: 4vh;
     margin: 0 0.5vw;
@@ -773,7 +788,31 @@ header {
     width: 30vw;
 }
 
+/* .productInfo {
+    display: flex;
+} */
+
 .productName {
     margin-left: 5vw;
     font-size: 1.5rem;
+}
+
+.addCart button{
+    border: none;
+    padding: 2vh 4vh;
+    color: #fff;
+    background: #35533a;
+    transition: .3s;
+    cursor: pointer;
+    margin: 6vh 6vw;
+    flex-wrap: wrap;
+}
+
+.addCart button:hover{
+    opacity: 70%;
+}
+
+.productDescription p {
+    font-size: 1.3rem;
+    margin: 1vw 2vw;
 }
