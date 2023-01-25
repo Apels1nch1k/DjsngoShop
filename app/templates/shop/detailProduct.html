@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<main class="wrapperProduct">
+
+    <div class="Product">
+
+
+        <div class="productImage">
+            <img src="{{ product.image.url }}" alt="">
+        </div>
+
+        <div class="productName">
+            <h4>{{ product.name }}</h4>
+        </div>
+
+
+    </div>
+</main>
+
+{% endblock %}

@@ -3,7 +3,7 @@
         <img src="{{ product.image.url}} " alt="">
     </div>
     <div class="productInfo">
-        <h4 class="productName">{{product.name}}</h4>
+        <a class="productName" href="{{ product.get_absolute_url}}">{{product.name}}</a>
     
         <p class="productPrice"> {{product.price}} руб </p>
         {% if not id|stringformat:"s"  in request.session.cart  %}

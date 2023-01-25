@@ -1,8 +1,8 @@
 import json
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView, ListView, FormView
+from django.views.generic import TemplateView, ListView, FormView, DetailView
 from django.template.loader import render_to_string
 from .models import *
 from users.forms import *
@@ -37,7 +37,9 @@ class ShopView(ListView):
         context = super().get_context_data(*args,**kwargs)
         context['searchForm'] = SearchForm()
         context['title'] = 'Магазин'
-        # context['products'] = Product.objects.all()
+        context['cat'] = Category.objects.all()
+        context['cat_selected'] = 0
+        
         return context
     
     def get_queryset(self):
@@ -50,10 +52,24 @@ class CategoryView(ListView):
     
     
     def get_queryset(self):
-        return Product.objects.filter(cat__slug=self.kwargs['cat_slug'])
+        return Product.objects.filter(category__slug=self.kwargs['slug_cat'])
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Категория'
-        
+        context['searchForm'] = SearchForm()
+        context['cat_selected'] = self.kwargs['slug_cat']
+        context['cat'] = Category.objects.all()
         return context
+    
+class ProductView(DetailView):
+    model = Product
+    template_name = 'shop/detailProduct.html'
+    slug_url_kwarg = 'slug_product'
+    context_object_name = 'product'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.kwargs['slug_product']
+        return context
+    

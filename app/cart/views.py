@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic.edit import BaseFormView
@@ -30,7 +31,7 @@ class AddCart(FormView):
         }
         user = CartUser.objects.filter(user=self.request.user)
         user.update(pcart=self.request.session['cart'])
-
+        
         return render(request, "cart/cartProduct.html", context=data)
         
 class RemoveCart(FormView):

@@ -748,3 +748,32 @@ header {
     width: 15vw;
     display: inline-block;
 }
+
+
+/* Страница заказа  (detailProduct.html) */
+
+
+
+.wrapperProduct {
+    padding: 2vw 20vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 10vh;
+}
+
+.Product {
+    width: 80vw;
+    display: flex;
+}
+
+.productImage img,
+.productImage {
+    height: 60vh;
+    width: 30vw;
+}
+
+.productName {
+    margin-left: 5vw;
+    font-size: 1.5rem;
+}

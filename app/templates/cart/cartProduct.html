@@ -9,7 +9,7 @@
         <p> Цена : {{ price }}</p>
         <div class="cartProductNameQuantity">
             Количесвто :
-            <form action="{% url 'cart:addcart' id %}" method="post" >
+            <form action="{% url 'cart:addcart' id %}" method="post"  class="CartAdd">
                 {% csrf_token %}
                 {{addcart}}
                 <input type="submit" />

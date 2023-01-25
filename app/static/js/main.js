@@ -234,9 +234,9 @@ CartAdd.forEach(el => {
         })
             .then((response) => response.text())
             .then(function (data) {
+                console.log(data)
                 cart.innerHTML += data
                 el.remove()
-                console.log(window.sessionStorage.getItem('sessionid'))
             })
     })
 })

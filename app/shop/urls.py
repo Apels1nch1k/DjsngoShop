@@ -8,5 +8,7 @@ urlpatterns = [
     path('',  IndexShow.as_view(), name="home"),
     path('shop',  ShopView.as_view(), name="shop"),
     path('search',  SearchView.as_view(), name="search"),
-    path('category/<slug:cat_slug>',  CategoryView.as_view(), name="category"),
+    path('shop/category/<slug:slug_cat>',  CategoryView.as_view(), name="category"),
+    path('shop/<slug:slug_product>',  ProductView.as_view(), name="product"),
+    
 ]

@@ -26,7 +26,19 @@
         </div>
 
         <div class="catalogShopName" id="catalogName">
-            asdasd
+                {% if cat_selected == 0 %}
+                    <a>Все категории</a>
+                {% else %}
+                    <a href="{% url 'shop:shop' %}">Все категории</a>
+                {% endif %}
+
+            {% for i in cat %}
+                {% if i.slug == cat_selected %}
+                    <a> {{i.name}}</a>
+                {% else %}
+                    <a href="{{ i.get_absolute_url }}">{{i.name}}</a>
+                {% endif %}
+            {% endfor %}
         </div>
 
     </section>
