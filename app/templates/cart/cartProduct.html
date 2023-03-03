@@ -15,7 +15,7 @@
                 <button type="submit" > обновить</button>
             </form>
         </div>
-        <form action="{% url 'cart:removecart' id %}" method="post" class="removeCart">
+        <form action="{% url 'cart:removecart' id %}" method="delete" class="removeCart">
             {% csrf_token %}
             <button type="submit"> Удалить</button><br>
         </form>  

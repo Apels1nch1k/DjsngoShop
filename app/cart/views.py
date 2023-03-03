@@ -25,10 +25,11 @@ class AddCart(FormView):
         data = {
             "id" : context['id'],
             'name' : context['name'],
-            "image" :  'media/' + context['image'],
+            "image" :  '/media/' + context['image'],
             "price" : context['price'],
             "quantity": self.request.session['cart'][str(product_id)]['quantity']
         }
+        print(data)
         if self.request.user.is_authenticated:
             user = CartUser.objects.filter(user=self.request.user)
             user.update(pcart=self.request.session['cart'])
@@ -49,5 +50,5 @@ class RemoveCart(FormView):
             user.update(pcart=self.request.session['cart'])
 
 
-        return JsonResponse({'data':"Удаленно"})
+        return HttpResponse(product_id)
 

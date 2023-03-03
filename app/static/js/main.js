@@ -248,7 +248,6 @@ CartRemove.forEach(el => {
     el.addEventListener("submit", function (e) {
         e.preventDefault()
         data = new FormData(this)
-        console.log(this)
         fetch(this.action, {
             method: this.method,
             body: data,
@@ -257,11 +256,9 @@ CartRemove.forEach(el => {
             }
 
         })
-            .then((response) => response.json())
             .then(function (data) {
-                console.log(data['data'])
-                console.log(this)
                 el.parentNode.parentNode.remove()
+                console.log(el)
             })
 
     })
