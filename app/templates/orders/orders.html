@@ -25,11 +25,13 @@
 
     </div>        
     <div class="TotalPriceOrder"> Сумма за всех товары: {{ cart.get_total_price}}</div>
-        <div>
+        <div class="infoOrder" >
             <form action="{% url 'orders:create' %}" method="post">
                 {% csrf_token %}
-                {{ formOrder }}
-                <input type="submit" value="Оформить заказ">
+                
+                {{ formOrder.address }}
+                {{ formOrder.city }}
+                <button type="submit" class="orderButten">Оформить заказ</button>
             </form>
         </div>
 </main>

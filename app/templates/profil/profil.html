@@ -9,20 +9,21 @@
     {% for i in userOrder %}
         <div class="userOrder">
             <div class="">
-            <h4>Номер заказа:{{ i.id }}</h4>
-            {{ i.get_total_cost }}
-            {{ i.city }}
+            <h4>Номер заказа: {{ i.id }}</h4>
+            <p > <span> Сумма заказа :</span> {{ i.get_total_cost }} руб</p>
 
-            {{ i.address }}
-            {{ i.status_order }}
+            <p><span> Адрес доставки</span>{{ i.city }} {{ i.address }}</p>
+            <p> <span>Статус заказа :</span> {{ i.status_order }}</p>
+            <p> <span>Дата оформлнение заказа:</span> {{ i.created }}</p>
             </div>
             {% for product in i.product %}
-                <figure class="imageOrderUser">
+                {{ product }}
+                {% comment %} <figure class="imageOrderUser">
 
                     <img src="/media/{{product.product.image}}" class="profilOrderImage"/>
                     <figcaption>{{product.product}}</figcaption> 
                     <figcaption> Количество: {{product.quantity}}</figcaption> 
-                </figure>
+                </figure> {% endcomment %}
             {% endfor %}
         </div>
     {% endfor %}

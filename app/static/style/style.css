@@ -210,7 +210,7 @@ header {
     transition: .3s;
 }
 
-.cartProductName:hover{
+.cartProductName:hover {
     opacity: 70%;
 }
 
@@ -639,12 +639,12 @@ header {
     display: none;
 }
 
-.catalogShopName a{
+.catalogShopName a {
     color: #35533a;
     font-size: 1.5rem;
 }
 
-.catalogShopName a:hover{
+.catalogShopName a:hover {
     opacity: 70%;
 }
 
@@ -727,14 +727,48 @@ header {
 }
 
 .TotalPriceOrder {
-    display: inline-block;
+    display: flex;
+    -ms-transform-origin-y: 2vh;
+    justify-content: center;
+}
+
+.infoOrder {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.orderForm {
+    height: 3vh;
+    outline: none;
+    border: 1px solid #6aa172;
+    transition: .2s;
+}
+
+.orderForm:focus {
+    border: 2px solid #35533a;
+
+}
+
+.orderButten {
+    outline: none;
+    color: white;
+    background: #6aa172;
+    border: none;
+    height: 3vh;
+    cursor: pointer;
+}
+
+.orderButten:hover {
+    opacity: 50%;
+    transition: .3s;
 }
 
 /* Профиль (Profil) */
 
 .wrapperProfil {
 
-    padding: 0px 20vh;
+    padding: 10vw 20vh;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -751,12 +785,14 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    gap: 20px;
 }
 
 .userOrder {
-    display: inline-block;
+    display: flex;
     width: 70vw;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .imageOrderUser {
@@ -788,6 +824,7 @@ header {
     width: 30vw;
 }
 
+
 /* .productInfo {
     display: flex;
 } */
@@ -797,7 +834,7 @@ header {
     font-size: 1.5rem;
 }
 
-.addCart button{
+.addCart button {
     border: none;
     padding: 2vh 4vh;
     color: #fff;
@@ -808,11 +845,17 @@ header {
     flex-wrap: wrap;
 }
 
-.addCart button:hover{
+.addCart button:hover {
     opacity: 70%;
 }
 
 .productDescription p {
     font-size: 1.3rem;
     margin: 1vw 2vw;
+}
+
+#numberCart {
+    z-index: 30;
+    position: absolute;
+    bottom: 2vh;
 }

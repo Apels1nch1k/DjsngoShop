@@ -12,8 +12,9 @@
 
         </div>
         <div class="cartBody">
-            {% for i in cart %}
-                {% with price=i.product.price image=i.product.image.url name=i.product.name quantity=i.quantity id=i.product.id %}
+            {% comment %} {{ request.cart.}} {% endcomment %}
+            {% for i in cart%}
+                {% with price_total=i.total_price price=i.product.price image=i.product.image.url name=i.product.name quantity=i.quantity id=i.product.id %}
                     {% include "cart/cartProduct.html" %}
                 {% endwith %}
             {% endfor %}
@@ -24,7 +25,7 @@
 
     </div>
     <div class="ordering">
-        <span id="TotalPrice"> Сумма за всех товары: {{ cart.get_total_price }}
+        <span > Сумма за всех товары: <span id="TotalPrice">{{ cart.get_total_price }}</span>
         </span>
         <a href="{% url 'orders:create' %}">Оформить заказ</a>
     </div>

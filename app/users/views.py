@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.views import LogoutView, LoginView
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView, ListView, FormView
@@ -35,9 +35,10 @@ class SingInView(LoginView):
             login(request, user)
 
             self.request.session['cart'] = CartUser.objects.get(user=user).pcart
-            
-            return redirect(reverse_lazy('shop:home'))
+            print(reverse_lazy('users:profil'))
+            return redirect(reverse_lazy('users:profil'))
         else:
+            print(form.errors.as_text)
             return JsonResponse({'errors': form.errors })
 
 
@@ -50,13 +51,16 @@ class Logout(LogoutView):
 
 class Profil(ListView):
     template_name = "profil/profil.html"
-    
+    model = OrderProduct
+
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print(self.request.user)
         context['title'] = "Профиль"
-        # context['userOrder'] = Order.objects.get(user=self.request.user)
-        # context['orderProduct'] = OrderProduct.objects.filter(order=Order.objects.get(user=self.request.user))
+        
+        # context['userOrder'] = OrderProduct.objects.filter(order=Order.objects.get(user=self.request.user))
+        # context['orderProduct'] = OrderProduct.objects.filter(user=self.request.user)
         return context
     
     def get(self, request, *args, **kwargs) :
@@ -66,6 +70,7 @@ class Profil(ListView):
         
         context = {
             'userOrder': userOrder,
+            'title': 'Профиль'
         }
         
         return render(request, self.template_name, context)

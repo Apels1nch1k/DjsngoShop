@@ -1,3 +1,7 @@
+
+
+
+
 const cartModal = document.getElementById('cartModal')
 const cartBtnOpen = document.getElementById('cartBtnOpen')
 const cartBtnClose = document.getElementById('cartBtnClose')
@@ -30,7 +34,7 @@ const numberCart = document.getElementById("numberCart")
 const cart = document.getElementsByClassName('cartBody')[0]
 const CartRemove = document.querySelectorAll('.removeCart')
 const CartUpdate = document.querySelectorAll('.CartUpdate')
-
+const quantityCheck = document.querySelectorAll('.quantityCheck')
 
 const TotalPrice = document.getElementById("TotalPrice")
 
@@ -88,7 +92,7 @@ if (singupform && singinform) {
             method: this.method,
             body: formData,
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
+                'X-CSRFToken': csrftoken,
             }
 
         })
@@ -96,8 +100,8 @@ if (singupform && singinform) {
             .then(function (data) {
 
                 if (data['errors']) {
-                    inputId = document.querySelectorAll('#SingUp input')
-                    inputError = document.querySelectorAll('#SingUp .errorText')
+                    const inputId = document.querySelectorAll('#SingUp input')
+                    const inputError = document.querySelectorAll('#SingUp .errorText')
                     inputId.forEach(element => {
                         element.classList.add('agreedInput')
                         element.classList.remove('errorInput')
@@ -107,7 +111,7 @@ if (singupform && singinform) {
                     });
 
                     for (let key in data['errors']) {
-                        ArrayForm = document.querySelector('#SingUp').querySelectorAll('input[name="' + key + '"]')
+                        const ArrayForm = document.querySelector('#SingUp').querySelectorAll('input[name="' + key + '"]')
                         ArrayForm[0].classList.remove('agreedInput')
                         ArrayForm[0].classList.add('errorInput')
                         let result = ""
@@ -118,7 +122,7 @@ if (singupform && singinform) {
                     }
                 }
                 else {
-                    inputError = document.querySelectorAll('#SingUp .errorText')
+                    const inputError = document.querySelectorAll('#SingUp .errorText')
 
                     inputError.forEach(element => {
                         element.remove()
@@ -137,15 +141,16 @@ if (singupform && singinform) {
             method: this.method,
             body: formData,
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
+                'X-CSRFToken': csrftoken,
             }
 
         })
             .then((res) => res.json())
             .then(function (data) {
                 if (data['errors']) {
-                    inputId = document.querySelectorAll('#SingIn input')
-                    inputError = document.querySelectorAll('#SingIn .errorText')
+                    const inputId = document.querySelectorAll('#SingIn input')
+                    console.log(inputId)
+                    const inputError = document.querySelectorAll('#SingIn .errorText')
                     inputId.forEach(element => {
                         element.classList.add('agreedInput')
                         element.classList.remove('errorInput')
@@ -155,7 +160,7 @@ if (singupform && singinform) {
                     });
 
                     for (let key in data['errors']) {
-                        ArrayForm = document.querySelector('#SingIn').querySelectorAll('input[name="' + key + '"]')
+                        const ArrayForm = document.querySelector('#SingIn').querySelectorAll('input[name="' + key + '"]')
                         ArrayForm[0].classList.remove('agreedInput')
                         ArrayForm[0].classList.add('errorInput')
                         let result = ""
@@ -171,8 +176,10 @@ if (singupform && singinform) {
                     inputError.forEach(element => {
                         element.remove()
                     });
-
+                    console.log(data)
                     clearInput(singupform, 1, 2)
+                    window.location.reload()
+                    return
                 }
             })
 
@@ -225,40 +232,77 @@ if (singupform && singinform) {
 CartAdd.forEach(el => {
     el.addEventListener("submit", function (e) {
         e.preventDefault()
-        data = new FormData(this)
-        console.log(data)
+        const data = new FormData(this)
+
         fetch(this.action, {
             body: data,
             method: this.method,
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
+                'X-CSRFToken': csrftoken,
             }
         })
             .then((response) => response.text())
             .then(function (data) {
                 console.log(data)
                 cart.innerHTML += data
+                console.log(numberCart.textContent)
+                numberCart.innerText = Number(numberCart.textContent) + 1
                 el.remove()
+                return
+            })
+    })
+})
+
+quantityCheck.forEach(el => {
+    el.addEventListener("input", function (e) {
+        e.preventDefault()
+        var data = new FormData(this.parentNode)
+        var total_price = this.parentNode.parentNode.parentNode.querySelector('.total_price')
+        console.log(total_price)
+        console.log(this.parentNode.parentNode.parentNode)
+        console.log(this.method)
+
+        fetch(this.parentNode.action, {
+            body: data,
+            method: this.parentNode.method,
+            headers: {
+                'X-CSRFToken': csrftoken,
+            }
+        })
+            .then((response) => response.json())
+            .then(function (data) {
+                console.log(data)
+                console.log(data['total_price'])
+                total_price.innerText = data.price_total
+                TotalPrice.innerHTML = data.all_price_total
+                numberCart.innerText = data.number
+                return
+                // cart.innerHTML += data
+                // el.remove()
             })
     })
 })
 
 
+
 CartRemove.forEach(el => {
+
     el.addEventListener("submit", function (e) {
         e.preventDefault()
-        data = new FormData(this)
+        // var data = new FormData(this)
         fetch(this.action, {
             method: this.method,
-            body: data,
+            // body: data,
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
+                'X-CSRFToken': csrftoken,
             }
 
         })
+            .then((response) => response.text())
             .then(function (data) {
                 el.parentNode.parentNode.remove()
-                console.log(el)
+                // console.log(data.number)
+                numberCart.innerText = Number(numberCart.textContent) - 1
             })
 
     })
@@ -281,24 +325,3 @@ btnCatalog.onclick = function () {
 
 }
 
-CartUpdate.forEach(el => {
-    el.addEventListener("submit", function (e) {
-        e.preventDefault()
-        data = new FormData(this)
-        fetch(this.action, {
-            method: this.method,
-            body: data,
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-            }
-
-        })
-            .then((response) => response.text())
-            .then(function (data) {
-                el.parentNode.parentNode.parentNode.remove()
-                cart.innerHTML += data
-
-            })
-
-    })
-})

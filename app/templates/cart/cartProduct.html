@@ -6,17 +6,17 @@
     </div>
     <div class="cartProductInfo">
         <p class="cartProductName">{{ name }}</p>
-        <p> Цена : {{ price }}</p>
+        <p > Цена : <span class="total_price">{{ price_total }}</span></p>
         <div class="cartProductNameQuantity">
-            Количесвто : {{quantity}}
             <form action="{% url 'cart:update' id %}" method="post"  class="CartUpdate">
                 {% csrf_token %}
-                {{addcart}}
-                <button type="submit" > обновить</button>
+                <input class='quantityCheck' name="quantity" type="number" value="{{quantity}}"/>
             </form>
         </div>
-        <form action="{% url 'cart:removecart' id %}" method="delete" class="removeCart">
+        <form action="{% url 'cart:removecart' id %}" class="removeCart" method='POST'>
+            
             {% csrf_token %}
+            <input type="hidden" value="{{id}}" />
             <button type="submit"> Удалить</button><br>
         </form>  
     </div>

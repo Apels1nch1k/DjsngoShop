@@ -9,8 +9,8 @@
         {% if not id|stringformat:"s"  in request.session.cart  %}
             <form action="{% url 'cart:addcart' id %}" method="POST" class="CartAdd" id="add">
                 {% csrf_token %}
-                <p class="hidden">{{addcart.quantity}}</p>
-                {{addcart.updaye}}
+                
+                <input type="hidden" name="quantity" value="1"/>
                 <button type="submit" class="BTNadd" id="add">В корзину</button>
             </form>
         {% else %}
